@@ -1,7 +1,7 @@
 #include <vector>
 #include <fstream>
 
-#include "../GIB/GIB.hpp"
+#include "include/GIB.hpp"
 
 int main(void)
 {

@@ -40,44 +40,11 @@ include CMakeFiles\rules.ninja
 # Logical path to working directory; prefix for absolute paths.
 
 cmake_ninja_workdir = F$:\Codes\GlyphsImagesBuilder\GlyphsImagesBuilder\build\
-# =============================================================================
-# Object build statements for STATIC_LIBRARY target mylib
-
 
 #############################################
-# Order-only phony target for mylib
+# Utility command for mylib
 
-build cmake_object_order_depends_target_mylib: phony || .
-
-build CMakeFiles\mylib.dir\src\mylib.cpp.obj: CXX_COMPILER__mylib_unscanned_Debug F$:\Codes\GlyphsImagesBuilder\GlyphsImagesBuilder\src\mylib.cpp || cmake_object_order_depends_target_mylib
-  CONFIG = Debug
-  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1 -std:c++17
-  INCLUDES = -IF:\Codes\GlyphsImagesBuilder\GlyphsImagesBuilder\include
-  OBJECT_DIR = CMakeFiles\mylib.dir
-  OBJECT_FILE_DIR = CMakeFiles\mylib.dir\src
-  TARGET_COMPILE_PDB = CMakeFiles\mylib.dir\mylib.pdb
-  TARGET_PDB = mylib.pdb
-  TARGET_SUPPORT_DIR = CMakeFiles\mylib.dir
-
-
-# =============================================================================
-# Link build statements for STATIC_LIBRARY target mylib
-
-
-#############################################
-# Link the static library mylib.lib
-
-build mylib.lib: CXX_STATIC_LIBRARY_LINKER__mylib_Debug CMakeFiles\mylib.dir\src\mylib.cpp.obj
-  CONFIG = Debug
-  LANGUAGE_COMPILE_FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1
-  LINK_FLAGS = /machine:X86
-  OBJECT_DIR = CMakeFiles\mylib.dir
-  POST_BUILD = cd .
-  PRE_LINK = cd .
-  TARGET_COMPILE_PDB = CMakeFiles\mylib.dir\mylib.pdb
-  TARGET_FILE = mylib.lib
-  TARGET_PDB = mylib.pdb
-  TARGET_SUPPORT_DIR = CMakeFiles\mylib.dir
+build mylib: phony
 
 
 #############################################
@@ -136,8 +103,6 @@ build install\local: phony CMakeFiles\install\local.util
 # =============================================================================
 # Target aliases.
 
-build mylib: phony mylib.lib
-
 # =============================================================================
 # Folder targets.
 
@@ -146,7 +111,7 @@ build mylib: phony mylib.lib
 #############################################
 # Folder: F:/Codes/GlyphsImagesBuilder/GlyphsImagesBuilder/build
 
-build all: phony mylib.lib
+build all: phony mylib
 
 # =============================================================================
 # Built-in targets

@@ -33,10 +33,6 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY FILES "F:/Codes/GlyphsImagesBuilder/GlyphsImagesBuilder/build/mylib.lib")
-endif()
-
-if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include" TYPE DIRECTORY FILES "F:/Codes/GlyphsImagesBuilder/GlyphsImagesBuilder/include/")
 endif()
 
@@ -58,9 +54,6 @@ if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT
     unset(_cmake_export_file_changed)
   endif()
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/cmake/MyLib" TYPE FILE FILES "F:/Codes/GlyphsImagesBuilder/GlyphsImagesBuilder/build/CMakeFiles/Export/4085907a80eb08ea3ec72024237724b8/MyLibTargets.cmake")
-  if(CMAKE_INSTALL_CONFIG_NAME MATCHES "^([Dd][Ee][Bb][Uu][Gg])$")
-    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/cmake/MyLib" TYPE FILE FILES "F:/Codes/GlyphsImagesBuilder/GlyphsImagesBuilder/build/CMakeFiles/Export/4085907a80eb08ea3ec72024237724b8/MyLibTargets-debug.cmake")
-  endif()
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)

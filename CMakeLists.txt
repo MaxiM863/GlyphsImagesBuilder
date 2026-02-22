@@ -1,18 +1,18 @@
 cmake_minimum_required(VERSION 3.14)
 project(mylib VERSION 1.0 LANGUAGES CXX)
 
-add_library(mylib src/mylib.cpp)
+add_library(mylib INTERFACE src/mylib.cpp)
 
 # Specify include directories for consumers
 # PUBLIC: used when building and when linking from another project
 target_include_directories(mylib
-    PUBLIC
+    INTERFACE
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>  # When building
         $<INSTALL_INTERFACE:include>                            # When installed
 )
 
 # Optionally set C++ standard
-target_compile_features(mylib PUBLIC cxx_std_17)
+target_compile_features(mylib INTERFACE cxx_std_17)
 
 # Install the library and headers
 install(TARGETS mylib
