@@ -23,10 +23,10 @@ class GIB{
 
     public:
 
-        static std::vector<unsigned char> GIB::fontBuffer;
-        static stbtt_fontinfo GIB::font;
+        static inline std::vector<unsigned char> fontBuffer;
+        static inline stbtt_fontinfo font;
 
-        static unsigned char* ImageData;     
+        static inline unsigned char* ImageData;     
 
     private:
         
