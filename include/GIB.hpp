@@ -21,7 +21,7 @@ class GIB{
     return true;
 };
 
-    private:
+    public:
 
         static std::vector<unsigned char> fontBuffer;
         static stbtt_fontinfo font;
