@@ -1,4 +1,4 @@
-F:/Codes/GlyphsImagesBuilder/GlyphsImagesBuilder/build/CMakeFiles/MyLibrary.dir
+F:/Codes/GlyphsImagesBuilder/GlyphsImagesBuilder/build/CMakeFiles/mylib.dir
 F:/Codes/GlyphsImagesBuilder/GlyphsImagesBuilder/build/CMakeFiles/edit_cache.dir
 F:/Codes/GlyphsImagesBuilder/GlyphsImagesBuilder/build/CMakeFiles/rebuild_cache.dir
 F:/Codes/GlyphsImagesBuilder/GlyphsImagesBuilder/build/CMakeFiles/list_install_components.dir

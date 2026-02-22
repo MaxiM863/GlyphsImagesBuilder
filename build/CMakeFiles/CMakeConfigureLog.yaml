@@ -1293,9 +1293,9 @@ events:
       - "C:/Program Files/CMake/bin/"
       - "C:/Program Files/CMake/sbin/"
       - "C:/Program Files/CMake/"
-      - "C:/Program Files (x86)/MyLibrary/bin/"
-      - "C:/Program Files (x86)/MyLibrary/sbin/"
-      - "C:/Program Files (x86)/MyLibrary/"
+      - "C:/Program Files (x86)/mylib/bin/"
+      - "C:/Program Files (x86)/mylib/sbin/"
+      - "C:/Program Files (x86)/mylib/"
     searched_directories:
       - "C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.50.35717/bin/Hostx86/x86/rc.com"
       - "C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.50.35717/bin/Hostx86/x86/rc.exe"
@@ -1364,12 +1364,12 @@ events:
         - "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\Ninja"
         - "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\Common7\\IDE\\VC\\Linux\\bin\\ConnectionManagerExe"
         - "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\vcpkg"
-      CMAKE_INSTALL_PREFIX: "C:/Program Files (x86)/MyLibrary"
+      CMAKE_INSTALL_PREFIX: "C:/Program Files (x86)/mylib"
       CMAKE_SYSTEM_PREFIX_PATH:
         - "C:/Program Files"
         - "C:/Program Files (x86)"
         - "C:/Program Files/CMake"
-        - "C:/Program Files (x86)/MyLibrary"
+        - "C:/Program Files (x86)/mylib"
   -
     kind: "try_compile-v1"
     backtrace:
@@ -1379,8 +1379,8 @@ events:
     checks:
       - "Detecting CXX compiler ABI info"
     directories:
-      source: "F:/Codes/GlyphsImagesBuilder/GlyphsImagesBuilder/build/CMakeFiles/CMakeScratch/TryCompile-0ebxz6"
-      binary: "F:/Codes/GlyphsImagesBuilder/GlyphsImagesBuilder/build/CMakeFiles/CMakeScratch/TryCompile-0ebxz6"
+      source: "F:/Codes/GlyphsImagesBuilder/GlyphsImagesBuilder/build/CMakeFiles/CMakeScratch/TryCompile-ll0yyr"
+      binary: "F:/Codes/GlyphsImagesBuilder/GlyphsImagesBuilder/build/CMakeFiles/CMakeScratch/TryCompile-ll0yyr"
     cmakeVariables:
       CMAKE_CXX_FLAGS: "/DWIN32 /D_WINDOWS /W3 /GR /EHsc"
       CMAKE_CXX_FLAGS_DEBUG: "/MDd /Zi /Ob0 /Od /RTC1"
@@ -1390,11 +1390,11 @@ events:
       variable: "CMAKE_CXX_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: 'F:/Codes/GlyphsImagesBuilder/GlyphsImagesBuilder/build/CMakeFiles/CMakeScratch/TryCompile-0ebxz6'
+        Change Dir: 'F:/Codes/GlyphsImagesBuilder/GlyphsImagesBuilder/build/CMakeFiles/CMakeScratch/TryCompile-ll0yyr'
         
-        Run Build Command(s): C:/PROGRA~1/MICROS~2/18/COMMUN~1/Common7/IDE/COMMON~1/MICROS~1/CMake/Ninja/ninja.exe -v cmTC_449de
-        [1/2] C:\\PROGRA~1\\MICROS~2\\18\\COMMUN~1\\VC\\Tools\\MSVC\\1450~1.357\\bin\\Hostx86\\x86\\cl.exe  /nologo /TP -D_MBCS  /DWIN32 /D_WINDOWS /W3 /GR /EHsc  /MDd /Zi /Ob0 /Od /RTC1 /showIncludes /FoCMakeFiles\\cmTC_449de.dir\\CMakeCXXCompilerABI.cpp.obj /FdCMakeFiles\\cmTC_449de.dir\\ /FS -c "C:\\Program Files\\CMake\\share\\cmake-4.2\\Modules\\CMakeCXXCompilerABI.cpp"
-        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\CMake\\bin\\cmake.exe" -E vs_link_exe --msvc-ver=1950 --intdir=CMakeFiles\\cmTC_449de.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x86\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x86\\mt.exe --manifests  -- C:\\PROGRA~1\\MICROS~2\\18\\COMMUN~1\\VC\\Tools\\MSVC\\1450~1.357\\bin\\Hostx86\\x86\\link.exe /nologo CMakeFiles\\cmTC_449de.dir\\CMakeCXXCompilerABI.cpp.obj  /out:cmTC_449de.exe /implib:cmTC_449de.lib /pdb:cmTC_449de.pdb /version:0.0 /machine:X86  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        Run Build Command(s): C:/PROGRA~1/MICROS~2/18/COMMUN~1/Common7/IDE/COMMON~1/MICROS~1/CMake/Ninja/ninja.exe -v cmTC_12446
+        [1/2] C:\\PROGRA~1\\MICROS~2\\18\\COMMUN~1\\VC\\Tools\\MSVC\\1450~1.357\\bin\\Hostx86\\x86\\cl.exe  /nologo /TP -D_MBCS  /DWIN32 /D_WINDOWS /W3 /GR /EHsc  /MDd /Zi /Ob0 /Od /RTC1 /showIncludes /FoCMakeFiles\\cmTC_12446.dir\\CMakeCXXCompilerABI.cpp.obj /FdCMakeFiles\\cmTC_12446.dir\\ /FS -c "C:\\Program Files\\CMake\\share\\cmake-4.2\\Modules\\CMakeCXXCompilerABI.cpp"
+        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\CMake\\bin\\cmake.exe" -E vs_link_exe --msvc-ver=1950 --intdir=CMakeFiles\\cmTC_12446.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x86\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x86\\mt.exe --manifests  -- C:\\PROGRA~1\\MICROS~2\\18\\COMMUN~1\\VC\\Tools\\MSVC\\1450~1.357\\bin\\Hostx86\\x86\\link.exe /nologo CMakeFiles\\cmTC_12446.dir\\CMakeCXXCompilerABI.cpp.obj  /out:cmTC_12446.exe /implib:cmTC_12446.lib /pdb:cmTC_12446.pdb /version:0.0 /machine:X86  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
         
       exitCode: 0
   -

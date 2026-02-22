@@ -17,25 +17,25 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 7,
+				"line" : 18,
 				"parent" : 0
 			},
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 11,
+				"line" : 25,
 				"parent" : 0
 			},
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 14,
+				"line" : 28,
 				"parent" : 0
 			},
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 27,
+				"line" : 44,
 				"parent" : 0
 			}
 		]
@@ -53,22 +53,11 @@
 			"destination" : "lib",
 			"paths" : 
 			[
-				"MyLibrary.lib"
+				"mylib.lib"
 			],
-			"targetId" : "MyLibrary::@6890427a1f51a3e7e1df",
+			"targetId" : "mylib::@6890427a1f51a3e7e1df",
 			"targetIndex" : 0,
 			"type" : "target"
-		},
-		{
-			"backtrace" : 1,
-			"component" : "Unspecified",
-			"cxxModuleBmiTarget" : 
-			{
-				"id" : "MyLibrary::@6890427a1f51a3e7e1df",
-				"index" : 0
-			},
-			"destination" : "lib",
-			"type" : "cxxModuleBmi"
 		},
 		{
 			"backtrace" : 2,
@@ -86,29 +75,29 @@
 		{
 			"backtrace" : 3,
 			"component" : "Unspecified",
-			"destination" : "lib/cmake/MyLibrary",
-			"exportName" : "MyLibraryTargets",
+			"destination" : "lib/cmake/MyLib",
+			"exportName" : "mylibTargets",
 			"exportTargets" : 
 			[
 				{
-					"id" : "MyLibrary::@6890427a1f51a3e7e1df",
+					"id" : "mylib::@6890427a1f51a3e7e1df",
 					"index" : 0
 				}
 			],
 			"paths" : 
 			[
-				"CMakeFiles/Export/c6b58c87a824cebcf30292a239be874d/MyLibraryTargets.cmake"
+				"CMakeFiles/Export/4085907a80eb08ea3ec72024237724b8/MyLibTargets.cmake"
 			],
 			"type" : "export"
 		},
 		{
 			"backtrace" : 4,
 			"component" : "Unspecified",
-			"destination" : "lib/cmake/MyLibrary",
+			"destination" : "lib/cmake/MyLib",
 			"paths" : 
 			[
-				"build/MyLibraryConfig.cmake",
-				"build/MyLibraryConfigVersion.cmake"
+				"build/MyLibConfig.cmake",
+				"build/MyLibConfigVersion.cmake"
 			],
 			"type" : "file"
 		}

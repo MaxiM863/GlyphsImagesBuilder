@@ -2,7 +2,7 @@
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "C:/Program Files (x86)/MyLibrary")
+  set(CMAKE_INSTALL_PREFIX "C:/Program Files (x86)/mylib")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -33,11 +33,7 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY FILES "F:/Codes/GlyphsImagesBuilder/GlyphsImagesBuilder/build/MyLibrary.lib")
-endif()
-
-if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  include("F:/Codes/GlyphsImagesBuilder/GlyphsImagesBuilder/build/CMakeFiles/MyLibrary.dir/install-cxx-module-bmi-Debug.cmake" OPTIONAL)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY FILES "F:/Codes/GlyphsImagesBuilder/GlyphsImagesBuilder/build/mylib.lib")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
@@ -45,15 +41,15 @@ if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/cmake/MyLibrary/MyLibraryTargets.cmake")
+  if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/cmake/MyLib/MyLibTargets.cmake")
     file(DIFFERENT _cmake_export_file_changed FILES
-         "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/cmake/MyLibrary/MyLibraryTargets.cmake"
-         "F:/Codes/GlyphsImagesBuilder/GlyphsImagesBuilder/build/CMakeFiles/Export/c6b58c87a824cebcf30292a239be874d/MyLibraryTargets.cmake")
+         "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/cmake/MyLib/MyLibTargets.cmake"
+         "F:/Codes/GlyphsImagesBuilder/GlyphsImagesBuilder/build/CMakeFiles/Export/4085907a80eb08ea3ec72024237724b8/MyLibTargets.cmake")
     if(_cmake_export_file_changed)
-      file(GLOB _cmake_old_config_files "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/cmake/MyLibrary/MyLibraryTargets-*.cmake")
+      file(GLOB _cmake_old_config_files "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/cmake/MyLib/MyLibTargets-*.cmake")
       if(_cmake_old_config_files)
         string(REPLACE ";" ", " _cmake_old_config_files_text "${_cmake_old_config_files}")
-        message(STATUS "Old export file \"$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/cmake/MyLibrary/MyLibraryTargets.cmake\" will be replaced.  Removing files [${_cmake_old_config_files_text}].")
+        message(STATUS "Old export file \"$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/cmake/MyLib/MyLibTargets.cmake\" will be replaced.  Removing files [${_cmake_old_config_files_text}].")
         unset(_cmake_old_config_files_text)
         file(REMOVE ${_cmake_old_config_files})
       endif()
@@ -61,16 +57,16 @@ if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT
     endif()
     unset(_cmake_export_file_changed)
   endif()
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/cmake/MyLibrary" TYPE FILE FILES "F:/Codes/GlyphsImagesBuilder/GlyphsImagesBuilder/build/CMakeFiles/Export/c6b58c87a824cebcf30292a239be874d/MyLibraryTargets.cmake")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/cmake/MyLib" TYPE FILE FILES "F:/Codes/GlyphsImagesBuilder/GlyphsImagesBuilder/build/CMakeFiles/Export/4085907a80eb08ea3ec72024237724b8/MyLibTargets.cmake")
   if(CMAKE_INSTALL_CONFIG_NAME MATCHES "^([Dd][Ee][Bb][Uu][Gg])$")
-    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/cmake/MyLibrary" TYPE FILE FILES "F:/Codes/GlyphsImagesBuilder/GlyphsImagesBuilder/build/CMakeFiles/Export/c6b58c87a824cebcf30292a239be874d/MyLibraryTargets-debug.cmake")
+    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/cmake/MyLib" TYPE FILE FILES "F:/Codes/GlyphsImagesBuilder/GlyphsImagesBuilder/build/CMakeFiles/Export/4085907a80eb08ea3ec72024237724b8/MyLibTargets-debug.cmake")
   endif()
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/cmake/MyLibrary" TYPE FILE FILES
-    "F:/Codes/GlyphsImagesBuilder/GlyphsImagesBuilder/build/MyLibraryConfig.cmake"
-    "F:/Codes/GlyphsImagesBuilder/GlyphsImagesBuilder/build/MyLibraryConfigVersion.cmake"
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/cmake/MyLib" TYPE FILE FILES
+    "F:/Codes/GlyphsImagesBuilder/GlyphsImagesBuilder/build/MyLibConfig.cmake"
+    "F:/Codes/GlyphsImagesBuilder/GlyphsImagesBuilder/build/MyLibConfigVersion.cmake"
     )
 endif()
 

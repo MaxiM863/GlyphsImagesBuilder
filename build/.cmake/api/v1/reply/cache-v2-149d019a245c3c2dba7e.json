@@ -451,7 +451,7 @@
 				}
 			],
 			"type" : "PATH",
-			"value" : "C:/Program Files (x86)/MyLibrary"
+			"value" : "C:/Program Files (x86)/mylib"
 		},
 		{
 			"name" : "CMAKE_LINKER",
@@ -663,7 +663,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "MyLibrary"
+			"value" : "mylib"
 		},
 		{
 			"name" : "CMAKE_PROJECT_SPDX_LICENSE",
@@ -1078,7 +1078,7 @@
 			"value" : "FALSE"
 		},
 		{
-			"name" : "MyLibrary_BINARY_DIR",
+			"name" : "mylib_BINARY_DIR",
 			"properties" : 
 			[
 				{
@@ -1090,7 +1090,7 @@
 			"value" : "F:/Codes/GlyphsImagesBuilder/GlyphsImagesBuilder/build"
 		},
 		{
-			"name" : "MyLibrary_IS_TOP_LEVEL",
+			"name" : "mylib_IS_TOP_LEVEL",
 			"properties" : 
 			[
 				{
@@ -1102,7 +1102,7 @@
 			"value" : "ON"
 		},
 		{
-			"name" : "MyLibrary_SOURCE_DIR",
+			"name" : "mylib_SOURCE_DIR",
 			"properties" : 
 			[
 				{

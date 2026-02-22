@@ -12,7 +12,7 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "MyLibrary.lib"
+			"path" : "mylib.lib"
 		}
 	],
 	"backtrace" : 1,
@@ -21,7 +21,9 @@
 		"commands" : 
 		[
 			"add_library",
-			"install"
+			"install",
+			"target_include_directories",
+			"target_compile_features"
 		],
 		"files" : 
 		[
@@ -41,7 +43,19 @@
 			{
 				"command" : 1,
 				"file" : 0,
-				"line" : 7,
+				"line" : 18,
+				"parent" : 0
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 8,
+				"parent" : 0
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 15,
 				"parent" : 0
 			}
 		]
@@ -57,17 +71,32 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : "/DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1"
+					"fragment" : "/DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1 -std:c++17"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"backtrace" : 3,
+					"path" : "F:/Codes/GlyphsImagesBuilder/GlyphsImagesBuilder/include"
 				}
 			],
 			"language" : "CXX",
+			"languageStandard" : 
+			{
+				"backtraces" : 
+				[
+					4
+				],
+				"standard" : "17"
+			},
 			"sourceIndexes" : 
 			[
 				0
 			]
 		}
 	],
-	"id" : "MyLibrary::@6890427a1f51a3e7e1df",
+	"id" : "mylib::@6890427a1f51a3e7e1df",
 	"install" : 
 	{
 		"destinations" : 
@@ -79,11 +108,11 @@
 		],
 		"prefix" : 
 		{
-			"path" : "C:/Program Files (x86)/MyLibrary"
+			"path" : "C:/Program Files (x86)/mylib"
 		}
 	},
-	"name" : "MyLibrary",
-	"nameOnDisk" : "MyLibrary.lib",
+	"name" : "mylib",
+	"nameOnDisk" : "mylib.lib",
 	"paths" : 
 	{
 		"build" : ".",
