@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.14)
 project(mylib VERSION 1.0 LANGUAGES CXX)
 
-add_library(mylib INTERFACE src/mylib.cpp)
+add_library(mylib INTERFACE include/GIB.hpp)
 
 # Specify include directories for consumers
 # PUBLIC: used when building and when linking from another project
