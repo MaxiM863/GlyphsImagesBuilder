@@ -15,16 +15,16 @@ class GIB{
 
         static bool build(const char* fontFilename){
     
-    GIB::loadFontFile(fontFilename);
-    GIB::createPlanes(0, 256, 512, 32, "spacingGlyphs.dat");
+            GIB::loadFontFile(fontFilename);
+            GIB::createPlanes(0, 256, 512, 32, "spacingGlyphs.dat");
 
-    return true;
-};
+            return true;
+        };
 
     public:
 
-        static std::vector<unsigned char> fontBuffer;
-        static stbtt_fontinfo font;
+        static std::vector<unsigned char> GIB::fontBuffer;
+        static stbtt_fontinfo GIB::font;
 
         static unsigned char* ImageData;     
 
