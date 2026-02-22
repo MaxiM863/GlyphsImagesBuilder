@@ -148,7 +148,7 @@ class GIB{
         return true;
     }
 
-    void GIB::clearColorToZero(unsigned char* bmp, int width, int height)
+    static void GIB::clearColorToZero(unsigned char* bmp, int width, int height)
     {
         int length = width * height;
 
@@ -158,7 +158,7 @@ class GIB{
         }
     }
 
-    void GIB::calculateSizeAndPosition(unsigned int startGlyph, unsigned int endGlyph, int pixelHeight, unsigned char** bitmap, int* width, int* height, int* xoff, int* yoff, int& maxDeltaHeight)
+    static void GIB::calculateSizeAndPosition(unsigned int startGlyph, unsigned int endGlyph, int pixelHeight, unsigned char** bitmap, int* width, int* height, int* xoff, int* yoff, int& maxDeltaHeight)
     {
         //int ascent, descent, lineGap;
 
@@ -253,7 +253,7 @@ class GIB{
         return data;
     };
         
-    static void calculateSizeAndPosition(unsigned int startGlyph, unsigned int endGlyph, int pixelHeight, unsigned char** bitmap, int* width, int* height, int* xoff, int* yoff, int& maxDeltaHeight);
+   
     
     static unsigned char* getSubImage(unsigned char* bmp, int width, int height, int destPosX, int destPosY, int destWidth, int destHeight){
 
@@ -278,8 +278,7 @@ class GIB{
 
         return subImage;
     };
-        
-    static void clearColorToZero(unsigned char* bmp, int width, int height);        
+          
     static bool drawSubImage(unsigned char* bmp, unsigned char* subImage, int width, int height, int destPosX, int destPosY, int destWidth, int destHeight){
     
         int posSubX = 0;
