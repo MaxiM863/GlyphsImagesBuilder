@@ -20,6 +20,7 @@ install(TARGETS mylib
     ARCHIVE DESTINATION lib
     LIBRARY DESTINATION lib
     RUNTIME DESTINATION bin
+    INCLUDES DESTINATION include
 )
 
 install(DIRECTORY include/ DESTINATION include)
