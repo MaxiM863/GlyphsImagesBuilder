@@ -1,3 +1,5 @@
+#define STB_IMAGE_IMPLEMENTATION
+
 #include "../include/GIB.hpp"
 
 bool GIB::build(const char* fontFilename)
