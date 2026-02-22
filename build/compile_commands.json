@@ -1,0 +1,8 @@
+[
+{
+  "directory": "F:/Codes/GlyphsImagesBuilder/GlyphsImagesBuilder/build",
+  "command": "C:\\PROGRA~1\\MICROS~2\\18\\COMMUN~1\\VC\\Tools\\MSVC\\1450~1.357\\bin\\Hostx86\\x86\\cl.exe  /nologo /TP /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1 /FoCMakeFiles\\MyLibrary.dir\\src\\mylib.cpp.obj /FdCMakeFiles\\MyLibrary.dir\\MyLibrary.pdb /FS -c F:\\Codes\\GlyphsImagesBuilder\\GlyphsImagesBuilder\\src\\mylib.cpp",
+  "file": "F:/Codes/GlyphsImagesBuilder/GlyphsImagesBuilder/src/mylib.cpp",
+  "output": "F:/Codes/GlyphsImagesBuilder/GlyphsImagesBuilder/build/CMakeFiles/MyLibrary.dir/src/mylib.cpp.obj"
+}
+]
