@@ -82,8 +82,7 @@ unsigned int get32HextiINT(const char* hexString) {
 
 std::vector<std::vector<Plage>> fontFilenames = {
 
-                {           
-                    /*        
+                {                              
                     Plage("max.ttf", "IPA Extensions", get32HextiINT("U+250"), get32HextiINT("U+2AF")),
                     Plage("max.ttf", "Spacing Modifier Letters", get32HextiINT("U+2B0"), get32HextiINT("U+2FF")),
                     Plage("max.ttf", "Combining Diacritical Marks", get32HextiINT("U+300"), get32HextiINT("U+36F")),
@@ -226,7 +225,7 @@ std::vector<std::vector<Plage>> fontFilenames = {
                     Plage("max.ttf", "Arabic Presentation Forms-B", get32HextiINT("U+FE70"), get32HextiINT("U+FEFF")),
                     Plage("max.ttf", "Halfwidth and Fullwidth Forms", get32HextiINT("U+FF01"), get32HextiINT("U+FFEE")),
                     Plage("max.ttf", "Specials", get32HextiINT("U+FFF9"), get32HextiINT("U+FFFD")),
-                    Plage("max.ttf", "Linear B Syllabary", get32HextiINT("U+10000"), get32HextiINT("U+1005D")),
+                    /*Plage("max.ttf", "Linear B Syllabary", get32HextiINT("U+10000"), get32HextiINT("U+1005D")),
                     Plage("max.ttf", "Linear B Ideograms", get32HextiINT("U+10080"), get32HextiINT("U+100FA")),
                     Plage("max.ttf", "Aegean Numbers", get32HextiINT("U+10100"), get32HextiINT("U+1013F")),
                     Plage("max.ttf", "Ancient Greek Numbers", get32HextiINT("U+10140"), get32HextiINT("U+1018A")),
@@ -281,14 +280,14 @@ std::vector<std::vector<Plage>> fontFilenames = {
                     Plage("max.ttf", "Tags", get32HextiINT("U+E0001"), get32HextiINT("U+E007F")),
                     Plage("max.ttf", "Variation Selectors Supplement", get32HextiINT("U+E0100"), get32HextiINT("U+E01EF")),
                     Plage("max.ttf", "Supplementary Private Use Area-A", get32HextiINT("U+F0000"), get32HextiINT("U+FFFFD")),
-                    Plage("max.ttf", "Supplementary Private Use Area-B", get32HextiINT("U+100000"), get32HextiINT("U+10FFFD"))
-                    },*/
+                    Plage("max.ttf", "Supplementary Private Use Area-B", get32HextiINT("U+100000"), get32HextiINT("U+10FFFD"))*/
+                    },
                     {
                     Plage("start1.ttf", "Basic Latin", get32HextiINT("U+0"), get32HextiINT("U+7F")),
                     Plage("start1.ttf", "Latin-1 Supplement", get32HextiINT("U+80"), get32HextiINT("U+FF")),
                     Plage("start1.ttf", "Latin Extended-A", get32HextiINT("U+100"), get32HextiINT("U+17F")),
                     Plage("start1.ttf", "Latin Extended-B", get32HextiINT("U+180"), get32HextiINT("U+24F")),
-                    }/*,
+                    },
                     {
                     Plage("china1.ttf", "Enclosed CJK Letters and Months", get32HextiINT("U+3200"), get32HextiINT("U+32FE")),
                     Plage("china1.ttf", "CJK Compatibility", get32HextiINT("U+3300"), get32HextiINT("U+33FF")),
@@ -315,7 +314,7 @@ std::vector<std::vector<Plage>> fontFilenames = {
                     Plage("korea.ttf", "CJK Compatibility Forms", get32HextiINT("U+FE30"), get32HextiINT("U+FE4F"), 20000),
                     Plage("korea.ttf", "CJK Compatibility Ideographs", get32HextiINT("U+F900"), get32HextiINT("U+FAD9"), 20000),
                     Plage("korea.ttf", "CJK Radicals Supplement", get32HextiINT("U+2E80"), get32HextiINT("U+2EF3"), 20000)
-                    }*/}
+                    }
             };
 
 // Entry point of the program

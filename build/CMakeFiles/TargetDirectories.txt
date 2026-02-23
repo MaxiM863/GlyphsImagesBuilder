@@ -1,7 +1,8 @@
-F:/Codes/GlyphsImagesBuilder/GlyphsImagesBuilder/build/CMakeFiles/mylib.dir
-F:/Codes/GlyphsImagesBuilder/GlyphsImagesBuilder/build/CMakeFiles/Test.dir
-F:/Codes/GlyphsImagesBuilder/GlyphsImagesBuilder/build/CMakeFiles/edit_cache.dir
-F:/Codes/GlyphsImagesBuilder/GlyphsImagesBuilder/build/CMakeFiles/rebuild_cache.dir
-F:/Codes/GlyphsImagesBuilder/GlyphsImagesBuilder/build/CMakeFiles/list_install_components.dir
-F:/Codes/GlyphsImagesBuilder/GlyphsImagesBuilder/build/CMakeFiles/install.dir
-F:/Codes/GlyphsImagesBuilder/GlyphsImagesBuilder/build/CMakeFiles/install/local.dir
+/home/vboxuser/Desktop/Codes/Glyphs/GlyphsImagesBuilder/build/CMakeFiles/mylib.dir
+/home/vboxuser/Desktop/Codes/Glyphs/GlyphsImagesBuilder/build/CMakeFiles/Test.dir
+/home/vboxuser/Desktop/Codes/Glyphs/GlyphsImagesBuilder/build/CMakeFiles/edit_cache.dir
+/home/vboxuser/Desktop/Codes/Glyphs/GlyphsImagesBuilder/build/CMakeFiles/rebuild_cache.dir
+/home/vboxuser/Desktop/Codes/Glyphs/GlyphsImagesBuilder/build/CMakeFiles/list_install_components.dir
+/home/vboxuser/Desktop/Codes/Glyphs/GlyphsImagesBuilder/build/CMakeFiles/install.dir
+/home/vboxuser/Desktop/Codes/Glyphs/GlyphsImagesBuilder/build/CMakeFiles/install/local.dir
+/home/vboxuser/Desktop/Codes/Glyphs/GlyphsImagesBuilder/build/CMakeFiles/install/strip.dir

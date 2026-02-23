@@ -41,12 +41,14 @@ class GIB{
                 }
             }
 
+            int sidePlane = 0;
+
             GIB::loadFontFile(Filenames);
-            GIB::createPlanes(PlagesOfFontsofGlyphs, 192, 16, "spacingGlyphs.dat");
-            GIB::createPlanes(PlagesOfFontsofGlyphs, 192, 20, "spacingGlyphs.dat");
-            GIB::createPlanes(PlagesOfFontsofGlyphs, 256, 26, "spacingGlyphs.dat");
-            GIB::createPlanes(PlagesOfFontsofGlyphs, 512, 38, "spacingGlyphs.dat");
-            GIB::createPlanes(PlagesOfFontsofGlyphs, 1024, 64, "spacingGlyphs.dat");
+            GIB::createPlanes(PlagesOfFontsofGlyphs, sidePlane, 16, "spacingGlyphs.dat");
+            GIB::createPlanes(PlagesOfFontsofGlyphs, sidePlane, 20, "spacingGlyphs.dat");
+            GIB::createPlanes(PlagesOfFontsofGlyphs, sidePlane, 26, "spacingGlyphs.dat");
+            GIB::createPlanes(PlagesOfFontsofGlyphs, sidePlane, 38, "spacingGlyphs.dat");
+            GIB::createPlanes(PlagesOfFontsofGlyphs, sidePlane, 64, "spacingGlyphs.dat");
 
             return true;
         };
@@ -118,7 +120,7 @@ class GIB{
             return true;
         };
 
-    static bool createPlanes(std::vector<std::vector<Plage>> PlagesOfFontsofGlyphs, int panelWidth, int targetPixelHeight, const char* outSpacingGlyphsFilename){
+    static bool createPlanes(std::vector<std::vector<Plage>> PlagesOfFontsofGlyphs, int& panelWidth, int targetPixelHeight, const char* outSpacingGlyphsFilename){
 
         std::vector<unsigned char*> bitmap;
 
@@ -127,37 +129,48 @@ class GIB{
         std::vector<int*> xoff;
         std::vector<int*> yoff;
         std::vector<unsigned int> unicodeValues;
+        long totalWidth = 0;
         
         int maxHeight = 0;
 
-        calculateSizeAndPosition(PlagesOfFontsofGlyphs, targetPixelHeight, bitmap, width, height, xoff, yoff, unicodeValues, maxHeight);
+        calculateSizeAndPosition(PlagesOfFontsofGlyphs, targetPixelHeight, bitmap, width, height, xoff, yoff, unicodeValues, maxHeight, totalWidth);
 
-        unsigned char* bitmapPlane = new unsigned char[panelWidth * panelWidth];
+        int sideSizeSqrt = sqrt(totalWidth * maxHeight * 1.01f);
+        unsigned char* bitmapPlane = new unsigned char[sideSizeSqrt * sideSizeSqrt];
 
-        clearColorToZero(bitmapPlane, panelWidth, panelWidth);
+        clearColorToZero(bitmapPlane, sideSizeSqrt, sideSizeSqrt);
 
         int cntrH = 0;
         int cntrV = 0;
+
+        int cc = 0;
         
         for(unsigned int i = 0; i < bitmap.size(); i++)
         {
-            drawSubImage(bitmapPlane, bitmap[i], panelWidth, panelWidth, cntrH, cntrV, *width[i], *height[i]);
+            drawSubImage(bitmapPlane, bitmap[cc], sideSizeSqrt, sideSizeSqrt, cntrH, cntrV, *width[cc], *height[cc]);
 
-            cntrH += *(width[i]);
+            cntrH += *(width[cc]);
 
-            if (cntrH > panelWidth)
+            if (cntrH > sideSizeSqrt)
             {
                 cntrH = 0;
                 cntrV += maxHeight;
             }
+            else
+            {
+                cc++;
+            }
 
-            if (cntrV > panelWidth)
+            if (cntrV > sideSizeSqrt)
             {
                 std::cerr << "Error: Panel height exceeded. Consider increasing panel size or reducing target pixel height.\n";
                 return false;
             }            
         }
 
+        panelWidth = sideSizeSqrt;
+
+        
         //stbi_write_bmp("output.bmp", panelWidth, panelWidth, 1, bitmapPlane);
         if (!stbi_write_png(("output" + std::to_string(targetPixelHeight) + ".png").c_str(), panelWidth, panelWidth, 1, bitmapPlane, 0)) {
         
@@ -195,7 +208,8 @@ class GIB{
         }
     }
 
-    static void calculateSizeAndPosition(std::vector<std::vector<Plage>> PlagesOfFontsofGlyphs, int pixelHeight, std::vector<unsigned char*>& bitmap, std::vector<int*>& width, std::vector<int*>& height, std::vector<int*>& xoff, std::vector<int*>& yoff, std::vector<unsigned int>& unicodeValues, int& maxDeltaHeight)
+    static void calculateSizeAndPosition(std::vector<std::vector<Plage>> PlagesOfFontsofGlyphs, int pixelHeight, std::vector<unsigned char*>& bitmap, std::vector<int*>& width, std::vector<int*>& height,
+         std::vector<int*>& xoff, std::vector<int*>& yoff, std::vector<unsigned int>& unicodeValues, int& maxDeltaHeight, long& totalWidth)
     {     
                 
         int maxHeight = 0;
@@ -226,6 +240,8 @@ class GIB{
                     bitmap.push_back(stbtt_GetGlyphBitmap(&fonts[j], 0, scale, exist, width[pos], height[pos], xoff[pos], yoff[pos]));
 
                     unicodeValues.push_back(k + PlagesOfFontsofGlyphs[j][i].jumpForCJK);
+
+                    totalWidth += *width[pos];
 
                     if(maxHeight < *height[pos]) maxHeight = *height[pos];
 
@@ -321,13 +337,19 @@ class GIB{
         int posSubX = 0;
         int lineY = 0;
 
+        int distY = 0;
+        int distX = 0;
+
         for(int i = destPosY; i < destPosY + destHeight; i++)
         {     
+            distY = i * width;
+            distX = (i - destPosY) * destWidth;
+
             for(int j = destPosX; j < destPosX + destWidth; j++)
             {
-                if(j * width + i >= width * height || j >= width || i >= height) continue;
+                if(j >= width) break;
                 // Assuming black text on white background
-                bmp[i * width + j] = 255 - subImage[(i - destPosY) * destWidth + (j - destPosX)];
+                bmp[distY + j] = 255 - subImage[distX + j - destPosX];
             }
         }
 
