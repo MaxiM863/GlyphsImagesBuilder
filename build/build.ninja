@@ -46,6 +46,47 @@ cmake_ninja_workdir = F$:\Codes\GlyphsImagesBuilder\GlyphsImagesBuilder\build\
 
 build mylib: phony
 
+# =============================================================================
+# Object build statements for EXECUTABLE target Test
+
+
+#############################################
+# Order-only phony target for Test
+
+build cmake_object_order_depends_target_Test: phony || mylib
+
+build CMakeFiles\Test.dir\Test\test.cpp.obj: CXX_COMPILER__Test_unscanned_Debug F$:\Codes\GlyphsImagesBuilder\GlyphsImagesBuilder\Test\test.cpp || cmake_object_order_depends_target_Test
+  CONFIG = Debug
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1 -std:c++latest
+  INCLUDES = -IF:\Codes\GlyphsImagesBuilder\GlyphsImagesBuilder\include
+  OBJECT_DIR = CMakeFiles\Test.dir
+  OBJECT_FILE_DIR = CMakeFiles\Test.dir\Test
+  TARGET_COMPILE_PDB = CMakeFiles\Test.dir\
+  TARGET_PDB = Test.pdb
+  TARGET_SUPPORT_DIR = CMakeFiles\Test.dir
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target Test
+
+
+#############################################
+# Link the executable Test.exe
+
+build Test.exe: CXX_EXECUTABLE_LINKER__Test_Debug CMakeFiles\Test.dir\Test\test.cpp.obj || mylib
+  CONFIG = Debug
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1
+  LINK_FLAGS = /machine:X86 /debug /INCREMENTAL /subsystem:console
+  LINK_LIBRARIES = kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
+  OBJECT_DIR = CMakeFiles\Test.dir
+  POST_BUILD = cd .
+  PRE_LINK = cd .
+  TARGET_COMPILE_PDB = CMakeFiles\Test.dir\
+  TARGET_FILE = Test.exe
+  TARGET_IMPLIB = Test.lib
+  TARGET_PDB = Test.pdb
+  TARGET_SUPPORT_DIR = CMakeFiles\Test.dir
+
 
 #############################################
 # Utility command for edit_cache
@@ -103,6 +144,8 @@ build install\local: phony CMakeFiles\install\local.util
 # =============================================================================
 # Target aliases.
 
+build Test: phony Test.exe
+
 # =============================================================================
 # Folder targets.
 
@@ -111,7 +154,7 @@ build install\local: phony CMakeFiles\install\local.util
 #############################################
 # Folder: F:/Codes/GlyphsImagesBuilder/GlyphsImagesBuilder/build
 
-build all: phony mylib
+build all: phony mylib Test.exe
 
 # =============================================================================
 # Built-in targets

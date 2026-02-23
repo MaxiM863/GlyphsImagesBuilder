@@ -9,68 +9,105 @@
 #include "stb_image_write.h"
 #include "stb_truetype.h"
 
+#include "../include/Plage.hpp"
+
 class GIB{
 
     public:
 
-        static bool build(const char* fontFilename){
+        static bool build(std::vector<std::vector<Plage>> PlagesOfFontsofGlyphs){
     
-            GIB::loadFontFile(fontFilename);
-            GIB::createPlanes(0, 256, 512, 32, "spacingGlyphs.dat");
+            std::vector<const char*> Filenames;
+            
+            for(unsigned int i = 0; i < PlagesOfFontsofGlyphs.size(); i++)
+            {
+                for(unsigned int j = 0; j < 1; j++)
+                {
+                    bool test = false;
+
+                    for(unsigned int k = 0; k < Filenames.size(); k++)
+                    {
+                        if(Filenames[k] == PlagesOfFontsofGlyphs[i][j].fontFilename)
+                        {
+                            test = true;
+                            break;
+                        }
+                    }
+
+                    if (!test) {
+
+                        Filenames.push_back(PlagesOfFontsofGlyphs[i][0].fontFilename.c_str());
+                    }
+                }
+            }
+
+            GIB::loadFontFile(Filenames);
+            GIB::createPlanes(PlagesOfFontsofGlyphs, 192, 16, "spacingGlyphs.dat");
+            GIB::createPlanes(PlagesOfFontsofGlyphs, 192, 20, "spacingGlyphs.dat");
+            GIB::createPlanes(PlagesOfFontsofGlyphs, 256, 26, "spacingGlyphs.dat");
+            GIB::createPlanes(PlagesOfFontsofGlyphs, 512, 38, "spacingGlyphs.dat");
+            GIB::createPlanes(PlagesOfFontsofGlyphs, 1024, 64, "spacingGlyphs.dat");
 
             return true;
         };
 
     public:
 
-        static inline std::vector<unsigned char> fontBuffer;
-        static inline stbtt_fontinfo font;
+        static inline std::vector<std::vector<unsigned char>> fontBuffer;
+        static inline std::vector<stbtt_fontinfo> fonts;
 
         static inline unsigned char* ImageData;     
 
     private:
         
-        static bool loadFontFile(const char* filename){
+        static bool loadFontFile(std::vector<const char*> filenames){
             try {
 
-                const char* fontPath = "Fonts/arial.ttf"; // Replace with your font file
+                for(unsigned int i = 0; i < filenames.size(); i++)
+                {
+                    const char* filename = filenames[i];
+                    const char* fontPath = filename; // Replace with your font file
 
-                // Open file in binary mode
-                std::ifstream fontFile(fontPath, std::ios::binary | std::ios::ate);
-                if (!fontFile) {
-                    std::cerr << "Error: Could not open font file: " << fontPath << "\n";
-                    return false;
+                    fonts.push_back(stbtt_fontinfo());
+
+                    
+                    // Open file in binary mode
+                    std::ifstream fontFile(fontPath, std::ios::binary | std::ios::ate);
+                    if (!fontFile) {
+                        std::cerr << "Error: Could not open font file: " << fontPath << "\n";
+                        return false;
+                    }
+
+                    // Get file size and read into buffer
+                    std::streamsize size = fontFile.tellg();
+                    fontFile.seekg(0, std::ios::beg);
+
+                    if (size <= 0) {
+                        std::cerr << "Error: Font file is empty or unreadable.\n";
+                        return false;
+                    }
+                    
+                    fontBuffer.push_back(std::vector<unsigned char>(static_cast<unsigned int>(size)));
+                    
+                    if (!fontFile.read(reinterpret_cast<char*>(fontBuffer[i].data()), size)) {
+                        std::cerr << "Error: Failed to read font file.\n";
+                        return false;
+                    }
+
+                    // Initialize font
+                    
+                    int offset = stbtt_GetFontOffsetForIndex(fontBuffer[i].data(), 0); // 0 = first font in file
+                    if (offset < 0) {
+                        std::cerr << "Error: Could not find font offset.\n";
+                        return false;
+                    }
+
+
+                    if (!stbtt_InitFont(&fonts[i], fontBuffer[i].data(), offset)) {
+                        std::cerr << "Error: stbtt_InitFont failed. Font may be corrupted or unsupported.\n";
+                        return false;
+                    }
                 }
-
-                // Get file size and read into buffer
-                std::streamsize size = fontFile.tellg();
-                fontFile.seekg(0, std::ios::beg);
-
-                if (size <= 0) {
-                    std::cerr << "Error: Font file is empty or unreadable.\n";
-                    return false;
-                }
-                
-                fontBuffer = std::vector<unsigned char>(static_cast<unsigned int>(size));
-                
-                if (!fontFile.read(reinterpret_cast<char*>(fontBuffer.data()), size)) {
-                    std::cerr << "Error: Failed to read font file.\n";
-                    return false;
-                }
-
-                // Initialize font
-                
-                int offset = stbtt_GetFontOffsetForIndex(fontBuffer.data(), 0); // 0 = first font in file
-                if (offset < 0) {
-                    std::cerr << "Error: Could not find font offset.\n";
-                    return false;
-                }
-
-                if (!stbtt_InitFont(&font, fontBuffer.data(), offset)) {
-                    std::cerr << "Error: stbtt_InitFont failed. Font may be corrupted or unsupported.\n";
-                    return false;
-                }
-
             } catch (const std::exception &e) {
 
                 std::cerr << "Error: " << e.what() << "\n";
@@ -81,18 +118,19 @@ class GIB{
             return true;
         };
 
-    static bool createPlanes(unsigned int startChar, unsigned int endChar, int panelWidth, int targetPixelHeight, const char* outSpacingGlyphsFilename){
+    static bool createPlanes(std::vector<std::vector<Plage>> PlagesOfFontsofGlyphs, int panelWidth, int targetPixelHeight, const char* outSpacingGlyphsFilename){
 
-        unsigned char** bitmap = nullptr;
+        std::vector<unsigned char*> bitmap;
 
-        int* width = nullptr;
-        int* height = nullptr;
-        int* xoff = nullptr;
-        int* yoff = nullptr;
-
+        std::vector<int*> width;
+        std::vector<int*> height;
+        std::vector<int*> xoff;
+        std::vector<int*> yoff;
+        std::vector<unsigned int> unicodeValues;
+        
         int maxHeight = 0;
 
-        calculateSizeAndPosition(startChar, endChar, targetPixelHeight, bitmap, width, height, xoff, yoff, maxHeight);
+        calculateSizeAndPosition(PlagesOfFontsofGlyphs, targetPixelHeight, bitmap, width, height, xoff, yoff, unicodeValues, maxHeight);
 
         unsigned char* bitmapPlane = new unsigned char[panelWidth * panelWidth];
 
@@ -100,34 +138,33 @@ class GIB{
 
         int cntrH = 0;
         int cntrV = 0;
-                
-        unsigned int cc = startChar;
-
-        unsigned char* dataSpacingGlypghs = new unsigned char[panelWidth * panelWidth * (sizeof(short) + sizeof(unsigned int))]; // store position and unicode value
-
-        while(cc <  endChar)
+        
+        for(unsigned int i = 0; i < bitmap.size(); i++)
         {
+            drawSubImage(bitmapPlane, bitmap[i], panelWidth, panelWidth, cntrH, cntrV, *width[i], *height[i]);
 
-            drawSubImage(bitmapPlane, bitmap[cc - startChar], panelWidth, panelWidth, cntrH, cntrV, width[cc - startChar], height[cc - startChar]);
-
-            cntrH += width[cc - startChar];
+            cntrH += *(width[i]);
 
             if (cntrH > panelWidth)
             {
                 cntrH = 0;
                 cntrV += maxHeight;
             }
-            else
-            {
-                cc++;
 
-                //byte[] vv = BitConverter.GetBytes(cntrH);
-                //fff.Write(vv, 0, 2);
-            }
+            if (cntrV > panelWidth)
+            {
+                std::cerr << "Error: Panel height exceeded. Consider increasing panel size or reducing target pixel height.\n";
+                return false;
+            }            
         }
 
-        stbi_write_bmp("output.bmp", panelWidth, panelWidth, 1, bitmapPlane);
-
+        //stbi_write_bmp("output.bmp", panelWidth, panelWidth, 1, bitmapPlane);
+        if (!stbi_write_png(("output" + std::to_string(targetPixelHeight) + ".png").c_str(), panelWidth, panelWidth, 1, bitmapPlane, 0)) {
+        
+            fprintf(stderr, "Failed to write PNG file\n");
+            free(bitmapPlane);
+            return 1;
+        }
         //fff.Close();
 
         /*
@@ -148,53 +185,53 @@ class GIB{
         return true;
     }
 
-    static void GIB::clearColorToZero(unsigned char* bmp, int width, int height)
+    static void clearColorToZero(unsigned char* bmp, int width, int height)
     {
         int length = width * height;
 
         for(int i = 0; i < length; i++)
         {
-            bmp[i] = 0;
+            bmp[i] = 255;
         }
     }
 
-    static void GIB::calculateSizeAndPosition(unsigned int startGlyph, unsigned int endGlyph, int pixelHeight, unsigned char** bitmap, int* width, int* height, int* xoff, int* yoff, int& maxDeltaHeight)
-    {
-        //int ascent, descent, lineGap;
-
-        //stbtt_GetFontVMetrics(&font, &ascent, &descent, &lineGap);
-
-
-        //unsigned char* bbb = new unsigned char[4];
-        
-        // Scale factor to convert font units to pixels
-        //float scale = stbtt_ScaleForPixelHeight(&font, pixelHeight);
-
-        // Convert ascent to pixels
-        //float ascentPx = ascent * scale;
-        
-        int lengthData = endGlyph - startGlyph;
-
-        bitmap = new unsigned char*[lengthData];
-        
-        width = new int[lengthData];
-        height = new int[lengthData];
-        xoff = new int[lengthData];
-        yoff = new int[lengthData];
-        
+    static void calculateSizeAndPosition(std::vector<std::vector<Plage>> PlagesOfFontsofGlyphs, int pixelHeight, std::vector<unsigned char*>& bitmap, std::vector<int*>& width, std::vector<int*>& height, std::vector<int*>& xoff, std::vector<int*>& yoff, std::vector<unsigned int>& unicodeValues, int& maxDeltaHeight)
+    {     
+                
         int maxHeight = 0;
 
-        for (unsigned int i = startGlyph; i < endGlyph; i++)
+        int pos = 0;
+
+        for(unsigned int j = 0; j < PlagesOfFontsofGlyphs.size(); j++)
         {
-            //clearColorToZero(bitmap, 3 * height, 2 * height);
 
-            int pos = i - startGlyph;
-            // Get bitmap for the glyph
-            float scale = stbtt_ScaleForPixelHeight(&font, (float)pixelHeight); // 32px height
+            for(unsigned int i = 0; i < PlagesOfFontsofGlyphs[j].size(); i++)
+            {
+
+                for (unsigned int k = (unsigned int)PlagesOfFontsofGlyphs[j][i].startPos; k < (unsigned int)PlagesOfFontsofGlyphs[j][i].endPos; k++)
+                {
             
-            bitmap[pos] = stbtt_GetGlyphBitmap(&font, 0, scale, i, &width[pos], &height[pos], &xoff[pos], &yoff[pos]);
+                    // Get bitmap for the glyph
+                    float scale = stbtt_ScaleForPixelHeight(&fonts[j], (float)pixelHeight); // 32px height
+        
+                    int exist = stbtt_FindGlyphIndex(&fonts[j], k);
 
-            if(maxHeight > height[pos]) maxHeight = height[pos];
+                    if(exist == 0) continue;
+
+                    width.push_back(new int);
+                    height.push_back(new int);
+                    xoff.push_back(new int);
+                    yoff.push_back(new int);
+
+                    bitmap.push_back(stbtt_GetGlyphBitmap(&fonts[j], 0, scale, exist, width[pos], height[pos], xoff[pos], yoff[pos]));
+
+                    unicodeValues.push_back(k + PlagesOfFontsofGlyphs[j][i].jumpForCJK);
+
+                    if(maxHeight < *height[pos]) maxHeight = *height[pos];
+
+                    pos++;
+                }
+            }          
         }
 
         maxDeltaHeight = maxHeight;
@@ -272,7 +309,7 @@ class GIB{
             for(int j = destPosY; j < destHeight; j++)
             {
 
-                subImage[posSubX * destWidth + j - destHeight] = bmp[lineY + j];
+                subImage[posSubX * destWidth + j - destHeight] = bmp[posSubX * width + j - destPosY];
             }
         }
 
@@ -284,16 +321,13 @@ class GIB{
         int posSubX = 0;
         int lineY = 0;
 
-        for(int i = destPosX; i < destWidth; i++)
-        {
-
-            posSubX = i - destWidth;
-            lineY = i * width;
-
-            for(int j = destPosY; j < destHeight; j++)
+        for(int i = destPosY; i < destPosY + destHeight; i++)
+        {     
+            for(int j = destPosX; j < destPosX + destWidth; j++)
             {
-
-                bmp[posSubX * destWidth + j - destHeight] = subImage[lineY + j];
+                if(j * width + i >= width * height || j >= width || i >= height) continue;
+                // Assuming black text on white background
+                bmp[i * width + j] = 255 - subImage[(i - destPosY) * destWidth + (j - destPosX)];
             }
         }
 
