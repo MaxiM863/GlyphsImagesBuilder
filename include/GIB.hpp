@@ -18,40 +18,71 @@ class GIB{
         static bool build(std::vector<std::vector<Plage>> PlagesOfFontsofGlyphs){
     
             std::vector<const char*> Filenames;
-            
-            for(unsigned int i = 0; i < PlagesOfFontsofGlyphs.size(); i++)
-            {
-                for(unsigned int j = 0; j < 1; j++)
-                {
-                    bool test = false;
 
-                    for(unsigned int k = 0; k < Filenames.size(); k++)
+            int sidePlane = 0;
+
+            fontBuffer.clear();
+            fonts.clear();
+
+            std::vector<std::vector<Plage>> finalPlages;
+
+            for(int i = 0; i < PlagesOfFontsofGlyphs.size(); i++)
+            {
+                for(int j = 0; j < PlagesOfFontsofGlyphs[i].size(); j++)
+                {
+
+                    bool testP = true;
+                    int locationP = -1;
+
+                    for(int k = 0; k < finalPlages.size(); k++)
                     {
-                        if(Filenames[k] == PlagesOfFontsofGlyphs[i][j].fontFilename)
+                        if(finalPlages[k][0].fontFilename == PlagesOfFontsofGlyphs[i][j].fontFilename)
                         {
-                            test = true;
+                            locationP = k;
+                            testP = false;
                             break;
                         }
                     }
 
-                    if (!test) {
-
-                        Filenames.push_back(PlagesOfFontsofGlyphs[i][0].fontFilename.c_str());
+                    if(testP)
+                    {
+                        finalPlages.push_back(std::vector<Plage>());
+                        Filenames.push_back(PlagesOfFontsofGlyphs[i][j].fontFilename.c_str());
+                        finalPlages[finalPlages.size()-1].push_back(PlagesOfFontsofGlyphs[i][j]);
                     }
+                    else
+                    {
+                        finalPlages[locationP].push_back(PlagesOfFontsofGlyphs[i][j]);
+                    }                    
                 }
             }
 
-            int sidePlane = 0;
 
             GIB::loadFontFile(Filenames);
-            GIB::createPlanes(PlagesOfFontsofGlyphs, sidePlane, 16, "spacingGlyphs.dat");
-            GIB::createPlanes(PlagesOfFontsofGlyphs, sidePlane, 20, "spacingGlyphs.dat");
-            GIB::createPlanes(PlagesOfFontsofGlyphs, sidePlane, 26, "spacingGlyphs.dat");
-            GIB::createPlanes(PlagesOfFontsofGlyphs, sidePlane, 38, "spacingGlyphs.dat");
-            GIB::createPlanes(PlagesOfFontsofGlyphs, sidePlane, 64, "spacingGlyphs.dat");
+            GIB::createPlanes(finalPlages, sidePlane, 16, "spacingGlyphs.dat");
+            sidePlane = 0;
+            GIB::createPlanes(finalPlages, sidePlane, 20, "spacingGlyphs.dat");
+            sidePlane = 0;
+            GIB::createPlanes(finalPlages, sidePlane, 26, "spacingGlyphs.dat");
+            sidePlane = 0;
+            GIB::createPlanes(finalPlages, sidePlane, 38, "spacingGlyphs.dat");
+            sidePlane = 0;
+            GIB::createPlanes(finalPlages, sidePlane, 64, "spacingGlyphs.dat");
+
+
 
             return true;
         };
+
+        static bool isAllCaractersPresentInPlage(Plage p)
+        {
+            fonts.clear();
+            fontBuffer.clear();
+
+            GIB::loadFontFile({p.fontFilename.c_str()});
+
+            return checkPresence(p);    
+        }
 
     public:
 
@@ -61,6 +92,8 @@ class GIB{
         static inline unsigned char* ImageData;     
 
     private:
+
+        
         
         static bool loadFontFile(std::vector<const char*> filenames){
             try {
@@ -109,6 +142,8 @@ class GIB{
                         std::cerr << "Error: stbtt_InitFont failed. Font may be corrupted or unsupported.\n";
                         return false;
                     }
+
+                    fontFile.close();
                 }
             } catch (const std::exception &e) {
 
@@ -169,7 +204,7 @@ class GIB{
         }
 
         panelWidth = sideSizeSqrt;
-
+        bitmap.clear();
         
         //stbi_write_bmp("output.bmp", panelWidth, panelWidth, 1, bitmapPlane);
         if (!stbi_write_png(("output" + std::to_string(targetPixelHeight) + ".png").c_str(), panelWidth, panelWidth, 1, bitmapPlane, 0)) {
@@ -178,6 +213,9 @@ class GIB{
             free(bitmapPlane);
             return 1;
         }
+
+        free(bitmapPlane);
+
         //fff.Close();
 
         /*
@@ -251,6 +289,24 @@ class GIB{
         }
 
         maxDeltaHeight = maxHeight;
+    };
+
+    static bool checkPresence(Plage p)
+    {
+
+        int count = 0;
+
+        for(unsigned int j = p.startPos; j < p.endPos; j++)
+        {
+
+            int exist = stbtt_FindGlyphIndex(&fonts[0], j);
+            
+            if(exist > 0) count++;
+
+            if(count > 3) return true;
+        }
+
+        return false;
     };
         
     static void getGlyphAscentAndHeight(unsigned char* bmp, int width, int height, int& asc, int& desc){
@@ -344,6 +400,8 @@ class GIB{
         {     
             distY = i * width;
             distX = (i - destPosY) * destWidth;
+
+            if(i >= height) break;
 
             for(int j = destPosX; j < destPosX + destWidth; j++)
             {
